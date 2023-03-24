@@ -1,0 +1,134 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-image: linear-gradient(to bottom right, red, yellow);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: bisque;
+}
+
+.form label {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  font-family: "";
+}
+
+.form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.form input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.form input[type="range"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background-color: #0069d9;
+}
+
+.list {
+  margin-top: 40px;
+}
+
+.list h2 {
+  margin-bottom: 20px;
+}
+
+.list ul {
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.list li > div:not(.priority) {
+  width: 15%;
+}
+
+.list li .task {
+  flex-grow: 1;
+}
+
+.list li .actions,
+.list li .due-date,
+.list li .priority {
+  margin-left: 20px;
+}
+
+.list li .edit,
+.list li .delete {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.list li .edit:hover,
+.list li .delete:hover {
+  text-decoration: underline;
+}
+
+.list li.completed {
+  background-color: #d4edda;
+  text-decoration: line-through;
+}
+
+.date {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.date p {
+  font-size: 14px;
+}
+
+.date span {
+  font-weight: bold;
+}
+
+.priority-bar {
+  display: inline-block;
+}
+
+.priority {
+  width: 55%;
+  background-color: white;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
