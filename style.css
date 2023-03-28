@@ -43,16 +43,18 @@ h1 {
 }
 
 .form button {
-  background-color: #007bff;
-  color: #fff;
+  background-color: hsl(36, 100%, 50%);
+  color: #865905;
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  border: #d4edda;
 }
 
 .form button:hover {
-  background-color: #0069d9;
+  background-color: #d96900;
+  color: rgb(255, 255, 255);
 }
 
 .list {
@@ -86,13 +88,20 @@ h1 {
   flex-grow: 1;
 }
 
-.list li .actions,
-.list li .due-date,
+.list li .actions {
+  margin-left: 20px;
+}
+.list li .due-date {
+  margin-left: 20px;
+}
 .list li .priority {
   margin-left: 20px;
 }
 
-.list li .edit,
+.list li .edit {
+  cursor: pointer;
+  color: #007bff;
+}
 .list li .delete {
   cursor: pointer;
   color: #007bff;
