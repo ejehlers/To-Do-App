@@ -4,7 +4,7 @@ document.getElementById("currentDate").textContent = currentDate;
 
 // Get task input fields
 const taskInput = document.getElementById("task");
-const dueDateInput = document.getElementById("due-date");
+const dueDateInput = document.getElementById("due date");
 const priorityInput = document.getElementById("priority");
 
 // Get task list
