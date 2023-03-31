@@ -7,26 +7,32 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
+    <main>
       <h1>To Do List:</h1>
-      <div class="date">
-        <p>Current Date:<span id="currentDate"></span></p>
-      </div>
-      <div class="form"><label</div>
-      <label for="task">Task:</label>
-      <input type="text" id="task" placeholder="Enter Task"/>
-      <label for="Due Date">Due Date:</label>
-      <input type="date" id="due-date" />
-      <label for="priority">Priority:</label>
-        <input type="range" min="1" max="5" id="priority" />
-        <button id="add">Add Task</button>
-    </div>
 
-    <div class="list">
-      <h2>Task List</h2>
-      <ul id="taskList"></ul>
-    </div>
-  </div>
+      <div class="date">
+        <span>Current Date:</span>
+        <span id="currentDate"></span>
+      </div>
+
+      <div class="form">
+        <label for="task">Task:</label>
+        <input type="text" id="task" placeholder="Enter Task" />
+
+        <label for="Due Date">Due Date:</label>
+        <input type="date" id="duedate" />
+
+        <label for="priority">Priority:</label>
+        <input type="range" min="1" max="5" id="priority" />
+
+        <button id="add">Add Task</button>
+      </div>
+
+      <div class="list">
+        <h2>Task List</h2>
+        <ul id="taskList"></ul>
+      </div>
+    </main>
 
     <script src="script.js"></script>
   </body>

@@ -1,8 +1,12 @@
-.container {
+body {
+  font-family: sans-serif;
+}
+
+main {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-image: linear-gradient(to bottom right, red, yellow);
+  background-color: #fcb900;
 }
 
 h1 {
@@ -24,6 +28,7 @@ h1 {
   border-radius: 5px;
   border: none;
   margin-bottom: 20px;
+  border: 2px solid rgb(124, 3, 3);
 }
 
 .form input[type="date"] {
@@ -32,6 +37,7 @@ h1 {
   border-radius: 5px;
   border: none;
   margin-bottom: 20px;
+  border: 2px solid rgb(124, 3, 3);
 }
 
 .form input[type="range"] {
@@ -44,12 +50,12 @@ h1 {
 
 .form button {
   background-color: hsl(36, 100%, 50%);
-  color: #865905;
+  color: #000000;
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  border: #d4edda;
+  border: 2px solid rgb(124, 3, 3);
 }
 
 .form button:hover {
@@ -107,7 +113,10 @@ h1 {
   color: #007bff;
 }
 
-.list li .edit:hover,
+.list li .edit:hover {
+  text-decoration: underline;
+}
+
 .list li .delete:hover {
   text-decoration: underline;
 }
@@ -118,16 +127,15 @@ h1 {
 }
 
 .date {
-  text-align: right;
+  text-align: center;
   margin-bottom: 20px;
+  border: 2px solid rgb(124, 3, 3);
+  background-color: #ffffff;
+  font-size: large;
 }
 
-.date p {
-  font-size: 14px;
-}
-
-.date span {
-  font-weight: bold;
+#currentdate {
+  padding-left: 10px;
 }
 
 .priority-bar {
