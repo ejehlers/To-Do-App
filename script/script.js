@@ -1,3 +1,14 @@
+
+class Task {
+  constructor(id, taskTitle, dueDate, priority, completed) {
+    this.id = id;
+    this.taskTitle = taskTitle;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.completed = completed;
+  }
+};
+
 // Get current date
 const currentDate = new Date().toLocaleDateString();
 document.getElementById("currentDate").textContent = currentDate;
@@ -6,6 +17,12 @@ document.getElementById("currentDate").textContent = currentDate;
 const taskInput = document.getElementById("task");
 const dueDateInput = document.getElementById("duedate");
 const priorityInput = document.getElementById("priority");
+const priorityForm = document.getElementById("to-do-form");
+const addTaskButton = document.getElementById("add");
+
+let isEdit = false;
+let editIndex = 0;
+let editedElement;
 
 // Get task list
 const taskList = document.getElementById("taskList");
@@ -14,7 +31,8 @@ const taskList = document.getElementById("taskList");
 let tasks = [];
 
 function getTasksFromStorage() {
-  tasks = JSON.parse(localStorage.getItem("tasks"));
+  let _storageTasks = localStorage.getItem("tasks");
+  tasks = _storageTasks === null  ? [] : JSON.parse(_storageTasks);
   displayTasks();
 }
 
@@ -24,6 +42,13 @@ function persistTasks() {
   localStorage.setItem("tasks", tasksJson);
 }
 
+function toggleEditState() {
+  // priorityForm.className;
+  isEdit = !isEdit;
+  addTaskButton.innerHTML = isEdit ? "Update" : "Add Task";
+  editedElement.classList.toggle("selected");
+}
+
 // Add task function
 function addTask() {
   // Get task details
@@ -31,17 +56,34 @@ function addTask() {
   const dueDate = dueDateInput.value;
   const priority = priorityInput.value;
 
-  // Create task object
-  const newTask = {
-    id: Date.now(),
-    task: task,
-    dueDate: dueDate,
-    priority: priority,
-    completed: false,
-  };
+  if(task == "") {
+    alert("Please enter a title")
+    return;
+  }
+  if(dueDate == "") {
+    alert("Please enter a date");
+    return;
+  }
 
-  // Add task to array
-  tasks.push(newTask);
+  // Create task object
+  const newTask = new Task(
+    Date.now(),
+    task,
+    dueDate,
+    priority,
+    false,
+  )
+  
+  if(isEdit) {
+    // Add task to array
+    tasks[editIndex] = newTask;
+    toggleEditState()
+    editIndex = 0;
+  }else{
+    // Add task to array
+    tasks.push(newTask);
+  }
+  
 
   // Clear input fields
   taskInput.value = "";
@@ -57,7 +99,7 @@ function addTask() {
 // Display tasks function
 function displayTasks() {
   // Sort tasks alphabetically
-  tasks.sort((a, b) => a.task.localeCompare(b.task));
+  tasks.sort((a, b) => a.taskTitle.localeCompare(b.taskTitle));
 
   // Clear task list
   taskList.innerHTML = "";
@@ -70,7 +112,8 @@ function displayTasks() {
 
     // Add task details to element
     li.innerHTML = `
-      <div class="task-name">${task.task}</div>
+    <input class="complete" type="checkbox" ${task.completed ? 'checked' : ''}>
+      <div class="task-name">${task.taskTitle}</div>
       <div class="due-date">${task.dueDate}</div>
       <div class="priority">
         <div class="priority-bar" style="width: ${
@@ -78,7 +121,7 @@ function displayTasks() {
         }%; background: ${getColor(task.priority)}">&nbsp;</div>
       </div>
       <div class="actions">
-        <div class="edit" onclick="editTask(${task.id})">Edit</div>
+        <div class="edit" onclick="editTask(${task.id}, event)">Edit</div>
         <div class="delete" onclick="deleteTask(${task.id})">Delete</div>
       </div>
     `;
@@ -89,7 +132,7 @@ function displayTasks() {
     }
 
     // Add click event to task name to toggle completion
-    const taskName = li.querySelector(".task-name");
+    const taskName = li.querySelector(".complete");
     taskName.addEventListener("click", () => {
       strike(task.id);
       li.classList.toggle("completed");
@@ -129,23 +172,26 @@ function strike(id) {
 }
 
 // Edit task function
-function editTask(id) {
-  // Get task object by id
-  const taskIndex = tasks.findIndex((task) => task.id === id);
-  const task = tasks[taskIndex];
+function editTask(id, event) {
 
-  // Update input fields with task details
-  taskInput.value = task.task;
-  dueDateInput.value = task.dueDate;
-  priorityInput.value = task.priority;
+  if(!isEdit) {  
 
-  // Remove task from array
-  tasks.splice(taskIndex, 1);
+    editedElement = event.target.closest('LI');
+    console.log(editedElement);
+    toggleEditState();
 
-  //update local storage with updated values
-  persistTasks();
-  // Update task list
-  displayTasks();
+    // Get task object by id
+    const taskIndex = tasks.findIndex((task) => task.id === id);
+    const task = tasks[taskIndex];
+    editIndex = taskIndex;
+
+    // Update input fields with task details
+    taskInput.value = task.taskTitle;
+    dueDateInput.value = task.dueDate;
+    priorityInput.value = task.priority;
+
+  }
+
 }
 
 // Delete task function
@@ -163,8 +209,8 @@ function deleteTask(id) {
 }
 
 // Add event listener to add task button
-const addTaskButton = document.getElementById("add");
 addTaskButton.addEventListener("click", addTask);
 
 // Display initial tasks
 getTasksFromStorage();
+
